@@ -31,6 +31,15 @@ Enemy.prototype.update = function(dt) {
     } else {
         this.x += dt * this.speed
     }
+
+    if (!(this.x >= player.x + boxWidth ||
+          this.x + boxWidth < player.x ||
+          this.y >= player.y + boxHeight ||
+          this.y + boxHeight < player.y))
+    {
+        console.log('Player died');
+        player.reset()
+    }
 }
 
 // Draw the enemy on the screen, required method for game
@@ -50,6 +59,11 @@ var Player = function(x, y) {
 
 Player.prototype.update = function(dt) {
 
+}
+
+Player.prototype.reset = function() {
+    this.x = boxWidth*2;
+    this.y = boxWidth*4;
 }
 
 Player.prototype.render = function() {
