@@ -1,3 +1,7 @@
+var boxWidth = 101;
+var boxHeight = 83;
+var bugY = 60;
+
 // Enemies our player must avoid
 var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
@@ -22,8 +26,8 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 
-    if (this.x > 505) {
-        this.x = -101
+    if (this.x > boxWidth*5) {
+        this.x = -boxWidth
     } else {
         this.x += dt * this.speed
     }
@@ -56,22 +60,22 @@ Player.prototype.handleInput = function(key){
     switch(key) {
         case 'up':
             if (this.y > 0) {
-                this.y -= 83;
+                this.y -= boxHeight;
             }
             break;
         case 'down':
-            if (this.y <404) {
-                this.y += 83;
+            if (this.y < boxWidth*4) {
+                this.y += boxHeight;
             }
             break;
         case 'left':
             if (this.x > 0) {
-                this.x -= 101;
+                this.x -= boxWidth;
             }
             break;
         case 'right':
-            if (this.x < 404) {
-                this.x += 101;
+            if (this.x < boxWidth*4) {
+                this.x += boxWidth;
             }
             break;
     }
@@ -82,13 +86,13 @@ Player.prototype.handleInput = function(key){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var en = new Enemy(0, 143);
-var en2 = new Enemy(0, 60);
-var en3 = new Enemy(0, 226);
+var en = new Enemy(0, bugY+boxHeight);
+var en2 = new Enemy(0, bugY);
+var en3 = new Enemy(0, bugY+boxHeight*2);
 
 var allEnemies = [en, en2, en3];
 
-var player = new Player(202,404)
+var player = new Player(boxWidth*2,boxWidth*4)
 
 
 
