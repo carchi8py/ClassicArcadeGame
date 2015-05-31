@@ -13,8 +13,7 @@ var Enemy = function(x, y) {
 
     //Math random return a number 0 to 1. So this give us 
     //Speeds of 100 to 1100
-    this.speed = 50;
-    //this.speed = Math.floor(Math.random()*(1000)+100);
+    this.speed = Math.floor(Math.random()*(1000));
     //X and Y are the location of the player
     this.x = x;
     this.y = y;
@@ -38,14 +37,10 @@ Enemy.prototype.update = function(dt) {
     // bug to touch the boy
     if (!(this.x >= player.x + boxWidth-25 ||
           this.x + boxWidth-25 < player.x ||
-          this.y >= player.y + boxHeight ||
-          this.y + boxHeight < player.y))
+          this.y >= player.y + boxHeight-20 ||
+          this.y + boxHeight-20 < player.y))
     {
         console.log('Player died');
-        console.log(this.x);
-        console.log(this.y);
-        console.log(player.x);
-        console.log(player.y);
         player.reset()
     }
 }
@@ -66,6 +61,11 @@ var Player = function(x, y) {
 }
 
 Player.prototype.update = function(dt) {
+    if (this.y < 10) {
+        this.x = boxWidth*2;
+        this.y = boxWidth*4;
+        console.log('Player Wins');
+    }
 
 }
 
