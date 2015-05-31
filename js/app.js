@@ -7,6 +7,8 @@ var Enemy = function(x, y) {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
 
+    //Math random return a number 0 to 1. So this give us 
+    //Speeds of 100 to 1100
     this.speed = Math.floor(Math.random()*(1000)+100);
     //X and Y are the location of the player
     this.x = x;
@@ -80,9 +82,11 @@ Player.prototype.handleInput = function(key){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var en = new Enemy(0, 140);
+var en = new Enemy(0, 143);
+var en2 = new Enemy(0, 60);
+var en3 = new Enemy(0, 226);
 
-var allEnemies = [en];
+var allEnemies = [en, en2, en3];
 
 var player = new Player(202,404)
 
