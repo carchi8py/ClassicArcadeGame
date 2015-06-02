@@ -2,6 +2,9 @@ var boxWidth = 101;
 var boxHeight = 83;
 var bugY = 60;
 
+var winCounter = $('.win').find('.counter');
+var loseCounter = $('.lose').find('.counter');
+
 // Enemies our player must avoid
 var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
@@ -12,8 +15,8 @@ var Enemy = function(x, y) {
     this.sprite = 'images/enemy-bug.png';
 
     //Math random return a number 0 to 1. So this give us 
-    //Speeds of 100 to 1100
-    this.speed = Math.floor(Math.random()*(1000));
+    //Speeds of 1 to 1001
+    this.speed = Math.floor(Math.random()*(1000)+1);
     //X and Y are the location of the player
     this.x = x;
     this.y = y;
@@ -40,7 +43,8 @@ Enemy.prototype.update = function(dt) {
           this.y >= player.y + boxHeight-20 ||
           this.y + boxHeight-20 < player.y))
     {
-        console.log('Player died');
+        player.lose +=1;
+        console.log('Player died ');
         player.reset()
     }
 }
@@ -58,14 +62,19 @@ var Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
+    this.win = 0;
+    this.lose = 0;
 }
 
 Player.prototype.update = function(dt) {
     if (this.y < 10) {
         this.x = boxWidth*2;
         this.y = boxWidth*4;
-        console.log('Player Wins');
+        player.win +=1
+        console.log('Player Wins ');
     }
+    winCounter.html(player.win);
+    loseCounter.html(player.lose);
 
 }
 
