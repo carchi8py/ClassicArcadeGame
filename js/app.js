@@ -1,6 +1,6 @@
-var boxWidth = 101;
-var boxHeight = 83;
-var bugY = 60;
+var BOX_WIDTH = 101;
+var BOX_HEIGHT = 83;
+var BUGY = 60;
 
 var winCounter = $('.win').find('.counter');
 var loseCounter = $('.lose').find('.counter');
@@ -20,7 +20,7 @@ var Enemy = function(x, y) {
     //X and Y are the location of the player
     this.x = x;
     this.y = y;
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -29,19 +29,23 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 
-    if (this.x > boxWidth*5) {
-        this.x = -boxWidth
+    if (this.x > BOX_WIDTH*5) {
+        this.x = -BOX_WIDTH
+        //Make the speed random
+        this.speed = Math.floor(Math.random()*(1000)+1);
     } else {
         this.x += dt * this.speed
     }
 
+
+
     //Because the image of the boy has some white space,
     //The box width needs to be 25 pixel smaller for the
     // bug to touch the boy
-    if (!(this.x >= player.x + boxWidth-25 ||
-          this.x + boxWidth-25 < player.x ||
-          this.y >= player.y + boxHeight-20 ||
-          this.y + boxHeight-20 < player.y))
+    if (!(this.x >= player.x + BOX_WIDTH-25 ||
+          this.x + BOX_WIDTH-25 < player.x ||
+          this.y >= player.y + BOX_HEIGHT-20 ||
+          this.y + BOX_HEIGHT-20 < player.y))
     {
         player.lose +=1;
         console.log('Player died ');
@@ -68,8 +72,8 @@ var Player = function(x, y) {
 
 Player.prototype.update = function(dt) {
     if (this.y < 10) {
-        this.x = boxWidth*2;
-        this.y = boxWidth*4;
+        this.x = BOX_WIDTH*2*dt;
+        this.y = BOX_WIDTH*4*dt;
         player.win +=1
         console.log('Player Wins ');
     }
@@ -79,8 +83,8 @@ Player.prototype.update = function(dt) {
 }
 
 Player.prototype.reset = function() {
-    this.x = boxWidth*2;
-    this.y = boxWidth*4;
+    this.x = BOX_WIDTH*2;
+    this.y = BOX_WIDTH*4;
 }
 
 Player.prototype.render = function() {
@@ -91,22 +95,22 @@ Player.prototype.handleInput = function(key){
     switch(key) {
         case 'up':
             if (this.y > 0) {
-                this.y -= boxHeight;
+                this.y -= BOX_HEIGHT;
             }
             break;
         case 'down':
-            if (this.y < boxWidth*4) {
-                this.y += boxHeight;
+            if (this.y < BOX_WIDTH*4) {
+                this.y += BOX_HEIGHT;
             }
             break;
         case 'left':
             if (this.x > 0) {
-                this.x -= boxWidth;
+                this.x -= BOX_WIDTH;
             }
             break;
         case 'right':
-            if (this.x < boxWidth*4) {
-                this.x += boxWidth;
+            if (this.x < BOX_WIDTH*4) {
+                this.x += BOX_WIDTH;
             }
             break;
     }
@@ -117,13 +121,13 @@ Player.prototype.handleInput = function(key){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var en = new Enemy(0, bugY+boxHeight);
-var en2 = new Enemy(0, bugY);
-var en3 = new Enemy(0, bugY+boxHeight*2);
+var en = new Enemy(0, BUGY+BOX_HEIGHT);
+var en2 = new Enemy(0, BUGY);
+var en3 = new Enemy(0, BUGY+BOX_HEIGHT*2);
 
 var allEnemies = [en, en2, en3];
 
-var player = new Player(boxWidth*2,boxWidth*4)
+var player = new Player(BOX_WIDTH*2, BOX_WIDTH*4)
 
 
 
