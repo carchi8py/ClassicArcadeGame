@@ -79,7 +79,6 @@ Player.prototype.update = function(dt) {
     }
     winCounter.html(player.win);
     loseCounter.html(player.lose);
-
 }
 
 Player.prototype.reset = function() {
