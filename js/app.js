@@ -30,11 +30,11 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 
     if (this.x > BOX_WIDTH*5) {
-        this.x = -BOX_WIDTH
+        this.x = -BOX_WIDTH;
         //Make the speed random
         this.speed = Math.floor(Math.random()*(1000)+1);
     } else {
-        this.x += dt * this.speed
+        this.x += dt * this.speed;
     }
 
 
@@ -48,15 +48,14 @@ Enemy.prototype.update = function(dt) {
           this.y + BOX_HEIGHT-20 < player.y))
     {
         player.lose +=1;
-        console.log('Player died ');
-        player.reset()
+        player.reset();
     }
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -68,27 +67,26 @@ var Player = function(x, y) {
     this.y = y;
     this.win = 0;
     this.lose = 0;
-}
+};
 
 Player.prototype.update = function(dt) {
     if (this.y < 10) {
         this.x = BOX_WIDTH*2*dt;
         this.y = BOX_WIDTH*4*dt;
-        player.win +=1
-        console.log('Player Wins ');
+        this.win +=1;
     }
     winCounter.html(player.win);
     loseCounter.html(player.lose);
-}
+};
 
 Player.prototype.reset = function() {
     this.x = BOX_WIDTH*2;
     this.y = BOX_WIDTH*4;
-}
+};
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Player.prototype.handleInput = function(key){
     switch(key) {
@@ -113,7 +111,7 @@ Player.prototype.handleInput = function(key){
             }
             break;
     }
-}
+};
 
 
 // Now instantiate your objects.
@@ -126,7 +124,7 @@ var en3 = new Enemy(0, BUGY+BOX_HEIGHT*2);
 
 var allEnemies = [en, en2, en3];
 
-var player = new Player(BOX_WIDTH*2, BOX_WIDTH*4)
+var player = new Player(BOX_WIDTH*2, BOX_WIDTH*4);
 
 
 
